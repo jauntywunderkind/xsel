@@ -1,39 +1,37 @@
-Nodejs Xsel
-===========
+# Nodejs Xsel
+
 Simple wrapper for linux xsel.
 
-* If you are not familiar with Linux Clipboard visit [http://www.freedesktop.org/wiki/Specifications/ClipboardsWiki/]
+* If you are not familiar with Linux Clipboard visit http://www.freedesktop.org/wiki/Specifications/ClipboardsWiki/
 
-Install
--------
+## Install
 `npm install xsel`
 
-Usage
------
+## Usage
+
 ```js
 var xsel = require('xsel')
 
 xsel.set('data to save', function(error){
-	console.log('data was copied to clipboard')
+console.log('data was copied to clipboard')
 
-	xsel.get(function(error, data){
-		console.log('clipboard data => ' + data) // => clipboard data => data to save
-	})
+xsel.get(function(error, data){
+console.log('clipboard data => ' + data) // => clipboard data => data to save
+})
 })
 ```
 
-Docs
-----
+## Docs
 
-`selection` argument is a `String` and can be:
-`"p"`: PRIMARY
-`"s"`: SECONDARY
+`selection` argument is a `String` and can be:  
+`"p"`: PRIMARY  
+`"s"`: SECONDARY  
 `"c"`: CLIPBOARD (default)
 
 ```js
 xsel.set(data, [selection], callback)
 ```
-Save `data` to the selection
+Save `data` to the selection  
 
 ```js
 xsel.get([selection], callback)
@@ -48,16 +46,17 @@ Clear the selection
 ```js
 xsel.remove([selection], callback)
 ```
-Request that the selection be cleared and that
+Request that the selection be cleared and that  
 the application owning it delete its contents
 
 ```js
 xsel.keep(callback)
 ```
-Do not modify the selections, but make the PRIMARY
-and SECONDARY selections persist even after the
+Do not modify the selections, but make the PRIMARY  
+and SECONDARY selections persist even after the  
 programs they were selected in exit.
-
+<br>
+<br>
 ```js
 xsel.exchange(callback)
 ```
