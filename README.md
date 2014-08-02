@@ -13,11 +13,11 @@ Simple wrapper for linux xsel.
 var xsel = require('xsel')
 
 xsel.set('data to save', function(error){
-console.log('data was copied to clipboard')
+	console.log('data was copied to clipboard')
 
-xsel.get(function(error, data){
-console.log('clipboard data => ' + data) // => clipboard data => data to save
-})
+	xsel.get(function(error, data){
+		console.log('clipboard data => ' + data) // => clipboard data => data to save
+	})
 })
 ```
 
