@@ -1,6 +1,6 @@
 var child_process = require('child_process')
 var call_once = require('call-once')
-var dummyFunc = require('dummy-func')
+var dummyFunc = new Function
 
 var xsel = module.exports = {}
 

@@ -3,5 +3,13 @@
 	"version": "0.0.1",
 	"description": "Nodejs wrapper to linux xsel (X11 Clipboard and Selections)",
 	"keywords": ["xsel", "xclip", "clipboard", "linux", "x11"],
-	"main": "index.js"
+	"main": "index.js",
+	"dependencies": [
+		"call-once",
+	],
+	"homepage": "https://github.com/rawiroaisen/node-xsel",
+	"repository": "git@github.com:rawiroaisen/node-xsel.git",
+	"issues": {
+		"url": "https://github.com/rawiroaisen/node-xsel/issues"
+	}
 }
