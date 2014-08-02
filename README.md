@@ -34,7 +34,6 @@ xsel.set(data, [selection], callback)
 ```
 Save `data` to the selection  
 <br>
-<br>
 ```js
 xsel.get([selection], callback)
 ```
