@@ -1,0 +1,7 @@
+{
+	"name": "xsel",
+	"version": "0.0.1",
+	"description": "Nodejs wrapper to linux xsel (X11 Clipboard and Selections)",
+	"keywords": ["xsel", "xclip", "clipboard", "linux", "x11"],
+	"main": "index.js"
+}
