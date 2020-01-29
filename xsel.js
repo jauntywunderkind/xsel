@@ -1,10 +1,14 @@
 import { exec as exec__} from "child_process"
 import { promisify} from "util"
-const exec_= promisify( exec_)
+const exec_= promisify( exec__)
 
-var xsel = module.exports = {}
-
-var REG_FILES = /^(?:\/[^\n]*\n)*\/[^\n]*$/
+export let REG_FILES = /^(?:\/[^\n]*\n)*\/[^\n]*$/
+REG_FILES.set= function( expression){
+	Object.defineProperty( expression, "set", {
+		value: REG_FILES.set
+	})
+	REG_FILES= expression
+}
 
 var clipArg = function(clip){
 	return (clip === 'p' || clip === 's') ? '-' + clip : '-b'
@@ -23,19 +27,19 @@ var exec = async function(arg, clip, data){
 	return output.stdout
 }
 
-xsel.set = function(data, clip){
+export const set = function(data, clip){
 	return exec('-i', clip, data)
 }
 
-xsel.append = function(data, clip){
+export const append = function(data, clip){
 	return exec('-a', clip, data)
 }
 
-xsel.get = function(clip){
+export const get = function(clip){
 	return exec('-o', clip)
 }
 
-xsel.getFiles = async function(clip){
+export const getFiles = async function(clip){
 	let text = await xsel.get(clip)
 	if(!REG_FILES.test(text)){
 		throw new Error( `No file '${text}`)
@@ -43,18 +47,33 @@ xsel.getFiles = async function(clip){
 	return text.split('\n')
 }
 
-xsel.clear = function(clip){
+export const clear = function(clip){
 	exec('-c', clip)
 }
 
-xsel.delete = function(clip){
+export const delete_ = {[ "delete"]: function(clip){
 	exec('-d', clip)
-}
+}}.delete
 
-xsel.keep = function(clip){
+export const keep = function(clip){
 	exec('-k', clip)
 }
 
-xsel.exchange = function(callback){
+export const exchange = function(callback){
 	exec('-x', clip)
+}
+
+export const xsel= {
+	set,
+	append,
+	get,
+	getFiles,
+	clear,
+	delete_,
+	keep,
+	exchange
+}
+export {
+	xsel as default,
+	xsel as Xsel
 }
