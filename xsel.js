@@ -16,8 +16,12 @@ var clipArg = function(clip){
 }
 
 var exec = async function(arg, clip, data){
-	const xe = exec_('xsel ' + arg + ' ' + clipArg(clip))
-	if( data){
+	const
+		// make arg lower priority,
+		// except weirdly xsel will always -p if found
+		cmd= `xsel ${arg} ${ clipArg( clip)}`,
+		xe = exec_( cmd)
+	if( data!== undefined){
 		xe.child.stdin.write( data)
 	}
 	xe.child.stdin.end()
