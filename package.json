@@ -1,9 +1,9 @@
 {
 	"name": "xsel",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Nodejs wrapper to linux xsel (X11 Clipboard and Selections)",
 	"keywords": ["xsel", "xclip", "clipboard", "linux", "x11"],
-	"main": "index.js",
+	"main": "xsel.js",
 	"dependencies": [
 		"call-once"
 	],

@@ -12,13 +12,11 @@ Simple wrapper for linux xsel.
 ```js
 var xsel = require('xsel')
 
-xsel.set('data to save', function(error){
-	console.log('data was copied to clipboard')
+await xsel.set('data to save')
+console.log('data was copied to clipboard') // => data was copied to clipboard
 
-	xsel.get(function(error, data){
-		console.log('clipboard data => ' + data) // => clipboard data => data to save
-	})
-})
+await xsel.get(function(error, data)
+console.log('clipboard data => ' + data) // => clipboard data => data to save
 ```
 
 ## Docs
@@ -29,34 +27,34 @@ xsel.set('data to save', function(error){
 `"c"`: CLIPBOARD (default)
 <br><br>
 ```js
-xsel.set(data, [selection], callback)
+await xsel.set(data, [selection])
 ```
 Save `data` to the selection
 <br><br>
 ```js
-xsel.get([selection], callback)
+await xsel.get([selection])
 ```
 Get `data` from the selection
 <br><br>
 ```js
-xsel.clear([selection], callback)
+await xsel.clear([selection])
 ```
 Clear the selection
 <br><br>
 ```js
-xsel.remove([selection], callback)
+await xsel.remove([selection])
 ```
 Request that the selection be cleared and that  
 the application owning it delete its contents
 <br><br>
 ```js
-xsel.keep(callback)
+await xsel.keep(callback)
 ```
 Do not modify the selections, but make the PRIMARY  
 and SECONDARY selections persist even after the  
 programs they were selected in exit.
 <br><br>
 ```js
-xsel.exchange(callback)
+await xsel.exchange(callback)
 ```
 Exchange the PRIMARY and SECONDARY selections
