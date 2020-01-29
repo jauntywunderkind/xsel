@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { exec as exec__} from "child_process"
 import { promisify} from "util"
 const exec_= promisify( exec__)
@@ -21,7 +22,7 @@ var exec = async function(arg, clip, data){
 	}
 	xe.child.stdin.end()
 	const output= await xe
-	if( ouput.stderr){
+	if( output.stderr){
 		throw new Error( output.stderr)
 	}
 	return output.stdout
@@ -76,4 +77,12 @@ export const xsel= {
 export {
 	xsel as default,
 	xsel as Xsel
+}
+
+export async function main( process_= typeof process!== "undefined"&& process){
+	const arg= process_&& process_.argv.slice( 2).join("")
+	console.log( await get( arg))
+}
+if( typeof process!== undefined&& `file://${process.argv[ 1]}`=== import.meta.url){
+	main()
 }
