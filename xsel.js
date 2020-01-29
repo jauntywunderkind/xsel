@@ -40,6 +40,10 @@ export const append = function(data, clip){
 	return exec('-a', clip, data)
 }
 
+export const follow= function(data, clip){
+	return exec('-f', clip, data)
+}
+
 export const get = function(clip){
 	return exec('-o', clip)
 }
@@ -71,6 +75,7 @@ export const exchange = function(callback){
 export const xsel= {
 	set,
 	append,
+	follow,
 	get,
 	getFiles,
 	clear,
