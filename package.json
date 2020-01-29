@@ -5,7 +5,7 @@
 	"keywords": ["xsel", "xclip", "clipboard", "linux", "x11"],
 	"main": "index.js",
 	"dependencies": [
-		"call-once",
+		"call-once"
 	],
 	"homepage": "https://github.com/rawiroaisen/node-xsel",
 	"repository": "git@github.com:rawiroaisen/node-xsel.git",

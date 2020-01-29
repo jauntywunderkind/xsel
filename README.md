@@ -1,4 +1,4 @@
-# Nodejs Xsel
+# xsel
 
 Simple wrapper for linux xsel.
 
