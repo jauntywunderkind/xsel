@@ -1,6 +1,6 @@
-var child_process = require('child_process')
-var call_once = require('call-once')
-var dummyFunc = new Function
+import { exec as exec__} from "child_process"
+import { promisify} from "util"
+const exec_= promisify( exec_)
 
 var xsel = module.exports = {}
 
@@ -10,68 +10,51 @@ var clipArg = function(clip){
 	return (clip === 'p' || clip === 's') ? '-' + clip : '-b'
 }
 
-var exec = function(arg, clip, callback){
-	child_process.exec('xsel ' + arg + ' ' + clipArg(clip), function(error, stdout, stderr){
-		if(typeof (callback = callback || clip) === 'function')
-			callback(stderr && new Error(stderr) || error, stdout);
-	})
+var exec = async function(arg, clip, data){
+	const xe = exec_('xsel ' + arg + ' ' + clipArg(clip))
+	if( data){
+		xe.child.stdin.write( data)
+	}
+	xe.child.stdin.end()
+	const output= await xe
+	if( ouput.stderr){
+		throw new Error( output.stderr)
+	}
+	return output.stdout
 }
 
-var spawn = function(arg, data, clip, callback){
-
-	callback = call_once(callback || clip)
-
-	var child = child_process.exec('xsel', [arg, clipArg(clip)])
-
-	child.on('error', callback)
-	child.stdin.write(data)
-	child.stdin.end()
-	callback(null)
+xsel.set = function(data, clip){
+	return exec('-i', clip, data)
 }
 
-xsel.set = function(data, clip, callback){
-	spawn('-i', data, clip, callback)
+xsel.append = function(data, clip){
+	return exec('-a', clip, data)
 }
 
-xsel.append = function(data, clip, callback){
-	spawn('-a', data, clip, callback)
+xsel.get = function(clip){
+	return exec('-o', clip)
 }
 
-xsel.get = function(clip, callback){
-	exec('-o', clip, callback)
+xsel.getFiles = async function(clip){
+	let text = await xsel.get(clip)
+	if(!REG_FILES.test(text)){
+		throw new Error( `No file '${text}`)
+	}
+	return text.split('\n')
 }
 
-xsel.getFiles = function(clip, callback){
-
-	if(typeof clip === 'function')
-		callback = clip;
-	else if(!callback)
-		callback = dummyFunc;
-
-	xsel.get(clip, function(error, text){
-
-		if(error)
-			return callback(error);
-
-		if(!REG_FILES.test(text))
-			return callback(null, null);
-
-		callback(null, text.split('\n'))
-	})
+xsel.clear = function(clip){
+	exec('-c', clip)
 }
 
-xsel.clear = function(clip, callback){
-	exec('-c', clip, callback)
+xsel.delete = function(clip){
+	exec('-d', clip)
 }
 
-xsel.delete = function(clip, callback){
-	exec('-d', clip, callback)
-}
-
-xsel.keep = function(clip, callback){
-	exec('-k', clip, callback)
+xsel.keep = function(clip){
+	exec('-k', clip)
 }
 
 xsel.exchange = function(callback){
-	exec('-x', clip, callback)
+	exec('-x', clip)
 }

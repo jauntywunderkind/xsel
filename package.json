@@ -7,9 +7,10 @@
 	"dependencies": [
 		"call-once"
 	],
-	"homepage": "https://github.com/rawiroaisen/node-xsel",
-	"repository": "git@github.com:rawiroaisen/node-xsel.git",
+	"homepage": "https://github.com/jauntywunderkind/node-xsel",
+	"repository": "git@github.com:jauntywunderkind/node-xsel.git",
 	"issues": {
-		"url": "https://github.com/rawiroaisen/node-xsel/issues"
-	}
+		"url": "https://github.com/jauntywunderkind/node-xsel/issues"
+	},
+	"type": "module"
 }
